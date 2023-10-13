@@ -17,4 +17,39 @@
         <item>Bisnis</item>
         <item>Eksekutif</item>
     </string-array>
+    <string-array name="advert_1">
+        <item>Japanese Meals</item>
+        <item>Upgrade your journey with mouthwatering Japanese delights! Buy in-train food tickets now and savor authentic flavors on the go. 🍣🚆 #TasteJapanOnRails</item>
+        <item>200000</item>
+    </string-array>
+    <string-array name="advert_2">
+        <item>Wifi Pass</item>
+        <item>Stay connected on your journey. Grab a Wi-Fi pass for seamless browsing and work on the go! 📶🚆 #StayConnected</item>
+        <item>10000</item>
+    </string-array>
+    <string-array name="advert_3">
+        <item>Movie Package</item>
+        <item>Indulge in a movie night on the train. Buy a movie package and enjoy the latest flicks during your ride. 🎬🚅 #TrainCinema</item>
+        <item>50000</item>
+    </string-array>
+    <string-array name="advert_4">
+        <item>Audio Tour Guide</item>
+        <item>Enhance your journey with a scenic tour guide. Get an audio guide for fascinating insights along the way. 🎧🏞️ #ExploreWithUs</item>
+        <item>20000</item>
+    </string-array>
+    <string-array name="advert_5">
+        <item>Baggage Check</item>
+        <item>For a hassle-free trip, add baggage check-in to your ticket. Travel light and stress-free! 🧳🚆 #NoBaggageWorries</item>
+        <item>100000</item>
+    </string-array>
+    <string-array name="advert_6">
+        <item>Priority Boarding</item>
+        <item>Get priority boarding and skip the queue. Enjoy a seamless journey with priority boarding. 🚆🚶 #PriorityBoarding</item>
+        <item>300000</item>
+    </string-array>
+    <string-array name="advert_7">
+        <item>Extra Legroom</item>
+        <item>Upgrade your seat to extra legroom. Enjoy a more comfortable journey with extra legroom. 🦵🚆 #ExtraLegroom</item>
+        <item>50000</item>
+    </string-array>
 </resources>

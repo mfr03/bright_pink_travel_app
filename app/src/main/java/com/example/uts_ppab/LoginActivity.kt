@@ -29,10 +29,12 @@ class LoginActivity : AppCompatActivity(){
                         )
                     ) {
                         val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+                        intent.putExtra("username", inputUsername.text.toString())
                         startActivity(intent)
                     }
                 }
             }
+
         }
     }
 }

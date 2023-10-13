@@ -10,6 +10,10 @@ import android.widget.AutoCompleteTextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.uts_ppab.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
+import org.apache.commons.validator.routines.EmailValidator
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
@@ -40,10 +44,13 @@ class MainActivity : AppCompatActivity() {
                 if (inputEmail.text.toString().isEmpty() || inputUsername.text.toString().isEmpty() ||inputPassword.text.toString().isEmpty() || inputTanggalLahir.text.toString().isEmpty()) {
                     Snackbar.make(binding.root, "Mohon isi bagan yang kosong", Snackbar.LENGTH_SHORT).setAnchorView(registerButton).show()
                 } else {
-                    val intent = Intent(this@MainActivity, LoginActivity::class.java)
-                    intent.putExtra("username", inputUsername.text.toString())
-                    intent.putExtra("password", inputPassword.text.toString())
-                    startActivity(intent)
+                    if(checkValidity(inputEmail.text.toString(), inputTanggalLahir.text.toString())) {
+                        val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                        intent.putExtra("username", inputUsername.text.toString())
+                        intent.putExtra("password", inputPassword.text.toString())
+                        startActivity(intent)
+                        finish()
+                    }
                 }
             }
 
@@ -64,5 +71,40 @@ class MainActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
+    private fun checkValidity(email : String, tanggalLahir : String) : Boolean {
+        if(EmailValidator.getInstance().isValid(email)) {
+            if(checkAge(tanggalLahir)) {
+                return true
+            }
+        } else {
+            Snackbar.make(binding.root, "Email yang anda masukkan tidak valid", Snackbar.LENGTH_SHORT).setAnchorView(binding.registerButton).show()
+        }
+        return false
+    }
+
+    private fun checkAge(tanggalLahir: String) : Boolean {
+
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val currentDate = "$day/${month + 1}/$year"
+
+        val currentCalendar = Calendar.getInstance()
+        currentCalendar.time = dateFormat.parse(currentDate)
+        val birthCalendar = Calendar.getInstance()
+        birthCalendar.time = dateFormat.parse(tanggalLahir)
+
+        val umur = currentCalendar.get(Calendar.YEAR) - birthCalendar.get(Calendar.YEAR)
+
+        if(umur >= 15) {
+            return true
+        } else {
+            Snackbar.make(binding.root, "Anda berumur kurang dari 15", Snackbar.LENGTH_SHORT).setAnchorView(binding.registerButton).show()
+        }
+        return false
+    }
 }
 

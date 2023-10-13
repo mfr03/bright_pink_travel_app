@@ -3,6 +3,7 @@ package com.example.uts_ppab
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -15,9 +16,12 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.cardview.widget.CardView
 import androidx.viewpager.widget.PagerAdapter
 import com.example.uts_ppab.databinding.ActivityInputBinding
+import com.google.android.material.snackbar.Snackbar
+import java.text.SimpleDateFormat
 import java.util.Calendar
 
 class InputActivity : AppCompatActivity() {
@@ -28,7 +32,17 @@ class InputActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val cardViews: List<CardView> = listOf(createCardView(), createCardView(), createCardView())
+        val cardViews: List<CardView> = listOf(createCardView(), createCardView(), createCardView(), createCardView(),
+            createCardView(), createCardView(), createCardView())
+        editCardView(cardViews[0], resources.getStringArray(R.array.advert_1))
+        editCardView(cardViews[1], resources.getStringArray(R.array.advert_2))
+        editCardView(cardViews[2], resources.getStringArray(R.array.advert_3))
+        editCardView(cardViews[3], resources.getStringArray(R.array.advert_4))
+        editCardView(cardViews[4], resources.getStringArray(R.array.advert_5))
+        editCardView(cardViews[5], resources.getStringArray(R.array.advert_6))
+        editCardView(cardViews[6], resources.getStringArray(R.array.advert_7))
+        val checkStates = BooleanArray(cardViews.size)
+
         with(binding) {
 
             tanggalBerangkat.setOnTouchListener { v, event ->
@@ -89,6 +103,25 @@ class InputActivity : AppCompatActivity() {
             }
 
             carouselViewPager.adapter = CardPagerAdapter(cardViews)
+
+            homeButton.setOnClickListener {
+                finish()
+            }
+
+            submitButton.setOnClickListener {
+                if (tanggalBerangkat.text.toString().isEmpty() || stasiunAwal.text.toString().isEmpty() || stasiunTujuan.text.toString().isEmpty() || kelasKereta.text.toString().isEmpty()) {
+                    Snackbar.make(binding.root, "Mohon isi bagan yang kosong", Snackbar.LENGTH_SHORT).setAnchorView(submitButton).show()
+                } else {
+                    val intent = Intent()
+                    intent.putExtra("tanggalBerangkat", tanggalBerangkat.text.toString())
+                    intent.putExtra("stasiunAwal", stasiunAwal.text.toString())
+                    intent.putExtra("stasiunTujuan", stasiunTujuan.text.toString())
+                    intent.putExtra("kelasKereta", kelasKereta.text.toString())
+                    intent.putExtra("checkedStates", (carouselViewPager.adapter as CardPagerAdapter).checkedStates)
+                    setResult(RESULT_OK, intent)
+                    finish()
+                }
+            }
         }
     }
 
@@ -98,9 +131,18 @@ class InputActivity : AppCompatActivity() {
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val currentDate = dateFormat.parse("$day/${month + 1}/$year")
+
         val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             val selectedDate = "$dayOfMonth/${monthOfYear + 1}/$year"
-            element.setText(selectedDate)
+            val selectedDateParsed = dateFormat.parse(selectedDate)
+            val comparedResult = selectedDateParsed.compareTo(currentDate)
+            if(comparedResult < 0) {
+                Snackbar.make(element, "Tanggal yang anda pilih sudah lewat", Snackbar.LENGTH_SHORT).setAnchorView(binding.homeButton).show()
+            } else {
+                element.setText(selectedDate)
+            }
         }, year, month, day)
 
         datePickerDialog.show()
@@ -118,14 +160,16 @@ class InputActivity : AppCompatActivity() {
         return cardView
     }
 
-    private fun editCardView(cardView: CardView) {
-        val textview = cardView.findViewById<TextView>(R.id.card_title)
-        textview.text = "CardView"
+    private fun editCardView(cardView: CardView, stringArray: Array<String>) {
+        val title = cardView.findViewById<TextView>(R.id.card_title)
+        title.text = stringArray[0]
+        val description = cardView.findViewById<TextView>(R.id.card_description)
+        description.text = stringArray[1]
     }
 
     class CardPagerAdapter(private val cardViews: List<CardView>) : PagerAdapter() {
 
-        private val checkedStates = BooleanArray(cardViews.size)
+        val checkedStates = BooleanArray(cardViews.size)
 
         override fun getCount(): Int {
             return cardViews.size
@@ -138,10 +182,12 @@ class InputActivity : AppCompatActivity() {
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             val cardView = cardViews[position]
 
-            val checkBox = cardView.findViewById<CheckBox>(R.id.checkBox)
-            checkBox.setOnCheckedChangeListener { _, isChecked ->
+            val toggleButton = cardView.findViewById<ToggleButton>(R.id.toggleButton)
+
+            toggleButton.setOnCheckedChangeListener { _, isChecked ->
                 checkedStates[position] = isChecked
             }
+
             cardView.cardElevation = 0f
             cardView.setCardBackgroundColor(Color.TRANSPARENT)
             container.addView(cardView)
@@ -153,9 +199,4 @@ class InputActivity : AppCompatActivity() {
         }
 
     }
-
-
-
-
-
 }
