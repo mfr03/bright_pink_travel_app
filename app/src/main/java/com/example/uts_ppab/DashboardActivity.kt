@@ -58,22 +58,9 @@ class DashboardActivity : AppCompatActivity() {
             plannedDates.add(inputData.getStringExtra("tanggalBerangkat")!!)
             dashboardCalendarDescription.text = "Untuk sekarang, anda memiliki ${plannedDates.size} rencana perjalanan"
             dashboardKelasKereta.text = inputData.getStringExtra("kelasKereta")
-
-            when(inputData.getStringExtra("kelasKereta")) {
-                "Ekonomi" -> {
-                    totalPrice += 500000
-                }
-                "Bisnis" -> {
-                    totalPrice += 1000000
-                }
-                "Eksekutif" -> {
-                    totalPrice += 1500000
-                }
-            }
-
             addedPackages(checkStates)
             dashboardAdditions.text = "Paket yang anda pilih: " + "\n" + textToGet.joinToString(separator = ", ")
-            dashboardHargaTiket.text = "Harga Tiket: " + NumberFormat.getCurrencyInstance(Locale("in", "ID")).format(totalPrice)
+            dashboardHargaTiket.text = "Harga Tiket: " + NumberFormat.getCurrencyInstance(Locale("in", "ID")).format(inputData.getIntExtra("hargaTiket", 0))
 
 
         }
@@ -85,31 +72,24 @@ class DashboardActivity : AppCompatActivity() {
                 when(i) {
                     0 -> {
                         textToGet += resources.getStringArray(R.array.advert_1)[0]
-                        totalPrice += resources.getStringArray(R.array.advert_1)[2].toInt()
                     }
                     1 -> {
                         textToGet += resources.getStringArray(R.array.advert_2)[0]
-                        totalPrice += resources.getStringArray(R.array.advert_2)[2].toInt()
                     }
                     2 -> {
                         textToGet += resources.getStringArray(R.array.advert_3)[0]
-                        totalPrice += resources.getStringArray(R.array.advert_3)[2].toInt()
                     }
                     3 -> {
                         textToGet += resources.getStringArray(R.array.advert_4)[0]
-                        totalPrice += resources.getStringArray(R.array.advert_4)[2].toInt()
                     }
                     4 -> {
                         textToGet += resources.getStringArray(R.array.advert_5)[0]
-                        totalPrice += resources.getStringArray(R.array.advert_5)[2].toInt()
                     }
                     5 -> {
                         textToGet += resources.getStringArray(R.array.advert_6)[0]
-                        totalPrice += resources.getStringArray(R.array.advert_6)[2].toInt()
                     }
                     6 -> {
                         textToGet += resources.getStringArray(R.array.advert_7)[0]
-                        totalPrice += resources.getStringArray(R.array.advert_7)[2].toInt()
                     }
 
                 }
@@ -143,7 +123,6 @@ class DashboardActivity : AppCompatActivity() {
             }
 
         }
-
         dialog.show()
 
     }

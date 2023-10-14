@@ -4,13 +4,11 @@
         <item>Stasiun A</item>
         <item>Stasiun B</item>
         <item>Stasiun C</item>
-        <item>Stasiun D</item>
     </array>
     <string-array name="spinner_stasiun_tujuan">
         <item>Stasiun Z</item>
         <item>Stasiun X</item>
         <item>Stasiun Y</item>
-        <item>Stasiun V</item>
     </string-array>
     <string-array name="spinner_kelas_kereta">
         <item>Ekonomi</item>
