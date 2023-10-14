@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
         if(umur >= 15) {
             return true
         } else {
-            Snackbar.make(binding.root, "Anda berumur kurang dari 15", Snackbar.LENGTH_SHORT).setAnchorView(binding.registerButton).show()
+            Snackbar.make(binding.root, "Anda berumur kurang dari 15 tahun", Snackbar.LENGTH_SHORT).setAnchorView(binding.registerButton).show()
         }
         return false
     }

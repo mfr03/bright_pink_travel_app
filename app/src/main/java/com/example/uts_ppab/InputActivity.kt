@@ -108,7 +108,6 @@ class InputActivity : AppCompatActivity() {
                 if(stasiunAwalBefore == "") {
                     stasiunAwalBefore = stasiunAwalNow
                 }
-                Log.d("stasiunAwalBefore", stasiunAwalBefore)
                 if (stasiunAwalBefore != stasiunAwalNow) {
                     if(stasiunTujuanBefore != "" && kelasKereta.text.toString() != "") {
 
@@ -151,7 +150,6 @@ class InputActivity : AppCompatActivity() {
                 if(stasiunTujuanBefore == "") {
                     stasiunTujuanBefore = stasiunTujuanNow
                 }
-                Log.d("stasiunTujuanBefore", stasiunTujuanBefore)
                 if (stasiunTujuanBefore != stasiunTujuanNow) {
                     if(stasiunAwalBefore != "") {
 

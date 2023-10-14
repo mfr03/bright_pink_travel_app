@@ -1,5 +1,25 @@
 <resources>
     <string name="app_name">UTS_PPAB</string>
+    <string name="tanggal_berangkat">Tanggal Berangkat</string>
+    <string name="stasiun_awal">Stasiun Awal</string>
+    <string name="stasiun_tujuan">Stasiun Tujuan</string>
+    <string name="kelas_kereta">Kelas Kereta</string>
+    <string name="home">Home</string>
+    <string name="submit">Submit</string>
+    <string name="harga_total">Harga Total:</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="tanggal_lahir">Tanggal Lahir</string>
+    <string name="selamat_pagi">Selamat Pagi!</string>
+    <string name="untuk_sekarang_no_plan">Untuk sekarang, anda tidak memiliki rencana perjalanan</string>
+    <string name="rencana_perjalanan">Rencana Perjalanan</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="no_rencana_baru">Anda belum menambahkan rencana baru!</string>
+    <string name="harga_tiket">Harga tiket:</string>
+    <string name="add_a_plan">Add a plan</string>
+    <string name="dashboard">Dashboard</string>
     <array name="spinner_stasiun_awal">
         <item>Stasiun A</item>
         <item>Stasiun B</item>

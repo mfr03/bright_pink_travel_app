@@ -61,12 +61,11 @@ class DashboardActivity : AppCompatActivity() {
             addedPackages(checkStates)
             dashboardAdditions.text = "Paket yang anda pilih: " + "\n" + textToGet.joinToString(separator = ", ")
             dashboardHargaTiket.text = "Harga Tiket: " + NumberFormat.getCurrencyInstance(Locale("in", "ID")).format(inputData.getIntExtra("hargaTiket", 0))
-
-
         }
     }
 
     private fun addedPackages(checkStates : BooleanArray?) {
+        textToGet = mutableListOf()
         for (i in 0 until (checkStates?.size ?: 0 )) {
             if(checkStates!![i]) {
                 when(i) {

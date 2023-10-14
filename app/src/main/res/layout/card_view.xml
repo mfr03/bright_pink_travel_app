@@ -1,12 +1,13 @@
 <!-- card_view_layout.xml -->
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="4dp"
+    android:layout_margin="8dp"
     app:cardCornerRadius="4dp"
-    android:layout_margin="8dp">
+    app:cardElevation="4dp"
+    tools:cardBackgroundColor="#ffe7de">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -42,12 +43,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="ToggleButton"
+            android:textOff="Not Added to package"
+            android:textOn="Added to package"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_description"
-            android:textOn="Added to package"
-            android:textOff="Not Added to package"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/card_description" />
 
         <TextView
             android:id="@+id/card_price"
